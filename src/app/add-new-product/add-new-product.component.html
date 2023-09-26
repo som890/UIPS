@@ -1,0 +1,73 @@
+<div class="container mt-5">
+    <div class="card p-2">
+        <div class="row">
+
+            <div class="col-6">
+                <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Tên sản phẩm</mat-label>
+                        <input matInput placeholder="Tên sản phẩm" [(ngModel)]="product.productName" name="productName">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Mô tả sản phẩm</mat-label>
+                        <input matInput placeholder="Mô tả sản phẩm" [(ngModel)]="product.productDescription"
+                            name="productDescription">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Giá thực tế sản phẩm</mat-label>
+                        <input matInput placeholder="Giá thực tế sản phẩm" [(ngModel)]="product.productActualPrice"
+                            name="productActualPrice">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Sản phẩm giảm giá</mat-label>
+                        <input matInput placeholder="Sản phẩm giảm giá" [(ngModel)]="product.productDiscountedPrice"
+                            name="productDiscountedPrice">
+                    </mat-form-field>
+
+                    <div align="end">
+                        <button mat-stroked-button class="warn" style="margin-right: 3px;" color="warn">Clear</button>
+                        <button mat-stroked-button color="primary" type="submit" *ngIf="isNewProduct">Thêm sản phẩm</button>
+                        <button mat-stroked-button color="primary" type="submit" *ngIf="!isNewProduct">Cập nhật
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="col-6">
+                <div>
+
+                    <div class="dropzone" appDrag (files)="fileDroped($event)">
+
+                        <div class="text-wrapper">
+                            <div class="centered">
+                                Kéo và thả file hoặc
+                                <a (click)="selectFile.click()" class="browse-button">Chọn</a>
+                                file
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <input type="file" style="display: none;" multiple value="select" #selectFile
+                        (change)="onFileSelected($event)">
+                </div>
+                <div class="mt-5">
+                    <div class="row">
+                        <mat-grid-list cols="4" rowHeight="1:1">
+                            <mat-grid-tile *ngFor="let file of product.productImages; let i = index">
+                                <div style="position: relative;">
+                                    <span class="btn-remove-image" (click)="removeImage(i)">X</span>
+                                    <img [src]="file.url" width="100px" height="100px">
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

@@ -1,0 +1,12 @@
+
+table{
+    width: 100%;
+}
+
+.mat-column-description{
+    width: 35% !important;
+}
+
+table th, td{
+    padding: 10px;
+}

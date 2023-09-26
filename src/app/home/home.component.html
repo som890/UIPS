@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Search any phone</mat-label>
+    <input matInput ngModel name="searchKey" 
+           id="searchKey"
+           #searchkeyword
+           (keyup)="searchByKeyWord(searchkeyword.value)"
+           placeholder="Search any phone">
+  </mat-form-field>
+
+  <div *ngIf="showTable">
+    <mat-grid-list cols="4" rowHeight="3:5" gutterSize="10">
+      <mat-grid-tile *ngFor="let p of productDetails">
+        <div class="row p-5">
+          <div class="image-container">
+            <img class="home-page-product-image" [src]="p.productImages[0].url" alt="">
+          </div>
+          <div class="mt-3">
+            <p><b>{{p.productName}}</b></p>
+          </div>
+          <div class="mt-2">
+            <p style="white-space: inherit;text-overflow:ellipsis; height: 40px;width: 200px;overflow: hidden;">
+              {{p.productDescription}}</p>
+          </div>
+          <div class="mt-2">
+            <b>USD. {{p.productDiscountedPrice}} </b> &nbsp; <b
+              style="text-decoration-line:line-through ;">{{p.productActualPrice}}</b>
+          </div>
+
+          <div class="mt-2">
+            <button type="button" mat-raised-button color="warn" (click)="showProductDetails(p.productId)">View
+              Details</button>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div class="text-center mt-5" style="padding-bottom: 100px;">
+    <button type="button" mat-raised-button color="primary" (click)="loadMoreProduct()">Load more</button>
+  </div>
+
+  <div class="mt-5">
+
+  </div>
+</div>
